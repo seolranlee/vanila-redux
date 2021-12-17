@@ -6,10 +6,24 @@ const number = document.querySelector("span")
 
 
 // reducer는 data를 modify하는 함수이다.
-const countModifier = (count = 0) => {
-  return count
+const countModifier = (count = 0, action) => {
+  console.log(count, action)
+  if (action.type === "ADD") {
+    return count + 1
+  } else if (action.type === 'MINUS') {
+    return count - 1
+  } else {
+    return count
+  }
 }
 
 const countStore = createStore(countModifier)
+
+countStore.dispatch({ type: "ADD" })
+countStore.dispatch({ type: "ADD" })
+countStore.dispatch({ type: "ADD" })
+countStore.dispatch({ type: "ADD" })
+countStore.dispatch({ type: "ADD" })
+countStore.dispatch({ type: "MINUS" })
 
 console.log(countStore.getState())
