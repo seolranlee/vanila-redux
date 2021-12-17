@@ -6,14 +6,19 @@ const number = document.querySelector("span")
 
 number.innerText = 0
 
-// reducer는 data를 modify하는 함수이다.
+const ADD = "ADD"
+const MINUS = "MINUS"
+
+// reducer는 state를 modify하는 함수이다.
+// reducer가 return하는건 내 어플리케이션의 state가 된다.
 const countModifier = (count = 0, action) => {
-  if (action.type === "ADD") {
-    return count + 1
-  } else if (action.type === 'MINUS') {
-    return count - 1
-  } else {
-    return count
+  switch (action.type) {
+    case ADD:
+      return count + 1
+    case MINUS:
+      return count - 1
+    default:
+      return count
   }
 }
 
@@ -27,11 +32,11 @@ const onChange = () => {
 countStore.subscribe(onChange)
 
 const handleAdd = () => {
-  countStore.dispatch({ type: "ADD" })
+  countStore.dispatch({ type: ADD })
 }
 
 const handleMinus = () => {
-  countStore.dispatch({ type: "MINUS" })
+  countStore.dispatch({ type: MINUS })
 }
 
 add.addEventListener("click", handleAdd)
